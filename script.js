@@ -1,118 +1,208 @@
-// let a = 8, 
-//     b = 3;
+// let a = +prompt();
 
-// {
-//     //a+2(x-b)=16;
-//     //2(x-b) = 16 - a
-//     // x - b = (16-a)/2
-//     //x = (16 - a) / 2 + b
-//     let x = (16 - a) / 2 + b;
-//     console.log(x);
-//     console.log(a + 2 * (x - b));
+// // if (isNaN(a)){
+// //     console.log('Не число');
+// // }else{
+// //     if (a > 0){
+// //         if (a % 2 === 0){
+// //             console.log(a * 2);
+// //         }else{
+// //             console.log(a / 2);
+// //         }
+// //     }else{
+// //         console.log('Число не положительное');
+// //     }
+// // }
+
+// // if (a != 0){
+// //     console.log('true');
+// // }
+
+// // if (a){
+// //     console.log('true');
+// // }
+
+// let b = isNaN(a) ?
+//     'Не число':
+//     a > 0 ?
+//         a % 2 ? // 0 или 1
+//             a / 2: // Результат 1
+//             a * 2: // Результат 0
+//         'Число не положительное'
+
+// console.log(b);
+
+// if (a % 2){
+//     console.log(a / 2)
+// }else{
+//     console.log(a * 2)
+// }
+
+// let day = +prompt("Введите день");
+// let overYear = null;
+// if (day) {
+//     if (!isNaN(day)) {
+//         if (day > 365) {
+//             overYear = Math.floor(day / 365);
+//             day %= 365; // day = day % 365
+//         }
+
+//         console.log(day);
+
+//         let mont = Math.floor(day / 31) + 1;
+
+//         console.log(mont);
+
+//         switch (mont) {
+//             case 1:
+//                 console.log("Зима");
+//                 console.log("Январь");
+//                 break;
+//             case 2:
+//                 console.log("Зима");
+//                 console.log("Фераль");
+//                 break;
+//             case 3:
+//                 console.log("Весна");
+//                 console.log("Март");
+//                 break;
+//             case 4:
+//                 console.log("Весна");
+//                 console.log("Апрель");
+//                 break;
+//             case 5:
+//                 console.log("Весна");
+//                 console.log("Май");
+//                 break;
+//             case 6:
+//                 console.log("Лето");
+//                 console.log("Июнь");
+//                 break;
+//             case 7:
+//                 console.log("Лето");
+//                 console.log("Июль");
+//                 break;
+//             case 8:
+//                 console.log("Лето");
+//                 console.log("Август");
+//                 break;
+//             case 9:
+//                 console.log("Осень");
+//                 console.log("Сентябрь");
+//                 break;
+//             case 10:
+//                 console.log("Осень");
+//                 console.log("Октябрь");
+//                 break;
+//             case 11:
+//                 console.log("Осень");
+//                 console.log("Ноябрь");
+//                 break;
+//             default:
+//                 console.log("Зима");
+//                 console.log("Декабрь");
+//         }
+//     }
+// }
+
+let days = [
+    "Воскресенье",
+    "Понедельник",
+    "Вторник",
+    "Среда",
+    "Четверг",
+    "Пятница",
+    "Суббота",
+];
+
+let date = new Date();
+
+/**
+ * for
+ * while
+ * do .. while
+ */
+
+// let c = null;
+
+// for (let i = 0; i < 100; i++) {
+//     console.log(i);
+//     if (!(i % 9)) {
+//         c++;
+//         if (c == 10) {
+//             console.log(c);
+//             break;
+//         }
+//     }
+// }
+
+// let s = "hello world";
+// let rez = ''
+
+// for (let i = 0; i < s.length; i++) {
+//     if (s[i] == "o") {
+//         rez += "a";
+//     } else {
+//         rez += s[i];
+//     }
+// }
+
+// console.log(rez);
+
+// let i = 0;
+
+// let counter = 0;
+
+// while (1) {
+//     console.log(i);
+//     if (!(i % 9)) {
+//         counter++;
+//         if (counter == 10) {
+//             console.log(counter);
+//             break;
+//         }
+//     }
+//     i++;
+// }
+
+// for (let i = 0; i < 5; ++i){
+//     console.log(i);
+// }
+
+// for (let i = 0; i < 5; i++){
+//     console.log(i);
 // }
 
 // {
-//     //b(x+15)=a+6x;
-//     //bx + b15 = a + 6x;
-//     //bx + b15 - 6x = a
-//     //x(b - 6) + b15 = a
-//     //x(b - 6) = a - b15
-//     //x = (a - b15) / (b - 6)
-//     let x = (a - b * 15) / (b - 6);
-//     console.log(x);
-//     console.log(b * (x + 15) === a + 6 * x);
+//     let i = 0;
+
+//     while (i < 5) {
+//         console.log(i++);
+//     }
 // }
 
 // {
-//     //x+2x+ax+bx=23780;
-//     //x(1+2+a+b) = 23780;
-//     //x = 23780 / (3 + a + b);
-//     let x = 23780 / (3  + a + b);
-//     console.log(x);
-//     console.log(x + 2 * x + a * x + b * x);
+//     let i = 0;
+
+//     while (i < 5) {
+//         console.log(++i);
+//     }
 // }
 
-// console.log('-------------------------');
-
-// {
-//     let s = '123.3.4d2342';
-//     console.log(Number(s));
-//     console.log(+s);
-//     console.log(parseInt(s));
-//     console.log(parseFloat(s));
-// }
-
-// console.log('-------------------------');
-
-// {
-//     let n = 342;
-//     console.log(String(n));
-//     console.log(n.toString(2));
-//     console.log(n + '');
-// }
-
-// /**
-//  * Number
-//  * String
-//  * Boolean
-//  * Object
-//  * bigInt
-//  * Symbol
-//  * undefined
-//  * null
-//  */
-
-// console.log(3 && 4 && 0 && '');
-// console.log(3 && 4 && '' && 0);
-
-// console.log(undefined || null || false || 0 || '' || 2 || 5);
-
-// console.log(false ?? 5);
-// console.log('' ?? 3);
-// console.log(null ?? 4);
-// console.log(undefined ?? 7);
-
-// let x = null;
-
-// x = x ?? 0;
-
-// console.log(Math);
-// console.dir(Math);
-
-// console.warn();
-// // console.clear();
-// x = [1, 2, 3, 4]
-// console.table(x);
-// console.log(x);
-
-// console.log('Hello\nWorld');
-
-// console.log(`Hello
-// World
-// ${a + b + `Rezult: ${x}`}`);
-
-let key = 1;
-
-switch (key) {
-    case 1:
-        console.log(1);
-        // break;
-    case 2:
-        console.log(2);
-        // break;
-    default:
-        console.log('default');
-        // break;
+while (0){
+    console.log('Выполнился while');
 }
 
-// if (condition) {
-//     console.log(true);
-// }else if(v2){
-//     console.log(true + 'v2');
-// }else{
-//     console.log(false);
-// }
+do {
+    console.log('Выполнился do .. while');
+} while (0);
 
-// let c = condition ? true : false;
+let s = 'Выполнился do .. while';
 
-const arr = [1, 2, 3];
+for (let k in s){
+    console.log(k);
+}
+
+for (let c of s) {
+    console.log(c);
+}
