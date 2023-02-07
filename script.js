@@ -1,156 +1,137 @@
-// for (let i = 1; i < 10; i++){
-//     for (let j = 1; j < 10; j++){
-//         console.log(`${i} * ${j} = ${i * j}`);
+// let arr = [12, false, 'Текст', 4, 2, -5, 0];
+// let arrBuf = [];
+
+// while (arr.length){
+//     let el = arr.pop() + '';
+//     el = el.split('').reverse().join('');
+//     arrBuf.push(el);
+// }
+
+// console.log(arrBuf);
+
+// let arr2 = [5, 9, 21, , , 9, 78, , , , 6, 0];
+// let count = 0;
+
+// for (let i = 0; i < arr2.length; i++){
+//     if (!arr2[i] && arr2[i] !== 0){
+//         count++;
 //     }
 // }
 
-// let summ = 0,
-//     count = 0;
+// console.log(count);
 
-// while (1) {
-//     let a = +prompt();
+// let arr = [];
 
-//     // if (!a) break; // if a == 0 -> a == false -> a -> false -> !a -> true
-
-//     if (a === 0) break;
-
-//     if (isNaN(a)) {
-//         alert('Введено не число');
-//         continue;
-//     }
-
-//     summ += a;
-//     count++;
+// while (1){
+//     let a = prompt();
+//     if(isNaN(a)) continue;
+//     if (a === '' && a !== '0') break;
+//     arr.push(+a);
 // }
 
-// console.log(summ);
-// console.log(summ / count);
+// console.log(arr);
 
-// let nums = '4 98 4 6 1 32 4 65 4 3 5 7 89 7 10 1 36 8 57';
-
-// let min = Infinity,
-//     max = -Infinity;
-
-// let buff = '';
-
-// for (let i = 0; i < nums.length; i++){
-//     if (nums[i] !== ' '){
-//         buff += nums[i];
-//     }else{
-//         if (+buff > max) max = +buff;
-//         if (+buff < min) min = +buff;
-//         buff = '';
-//     }
-// }
-
-// console.log(max, min);
-
-// let num = prompt('Вводить строго числа!');
-// let len = num.length;
+// let arr = [48, 9, 0, 4, 21, 2, 1, 0, 8, 84, 76, 8, 4, 13, 2, 0];
+// let fIndex = arr.indexOf(0);
+// let lIndex = arr.lastIndexOf(0);
 // let summ = 0;
-// let rev = '';
+// let sRez = '';
 
-// for (let i = 0; i < num.length; i++){
-//     summ += +num[i];
+// if (fIndex !== lIndex){
+//     for (let i = fIndex; i < lIndex; i++){
+//         summ += arr[i];
+//     }
+//     sRez = `Сумма элементов массива между нулями равна: ${summ}`;
+// }else{
+// document.write('<p>В массиве нет пар нулей</p>');
+//     sRez = 'В массиве нет пар нулей';
 // }
 
-// for (let i = len - 1; i >= 0; i--){
-//     rev += num[i];
-// }
+// 'Сумма элементов массива между нулями равна:'
 
-// console.log(`Вводимое число: ${num}, цифр в числе - ${len}, сумма = ${summ}, обратный порядок: ${rev}`);
+// document.write(`<p>${summ ?
+//     `Сумма элементов массива между нулями равна: ${summ}` :
+//     `В массиве нет пар нулей`}</p>`);
 
-let s = "1, 2, 3, 4, 5, 6, 7, 8, 9"; // -1-2-3-4-5-6-7-8-9-
-let rez = "-";
+// document.write('<p>' + sRez + '</p>');
 
-for (let i = 0; i < s.length; i++) {
-    if (s[i] !== " " && s[i] !== ",") {
-        rez += s[i] + "-";
-    }
-}
+// let h = +prompt();
+// let c = h;
+// let e = 1;
 
-console.log(rez);
+// for (let i = 1; i < h * 2; i++) {
+//     if (i <= h) {
+//         let s = "";
+//         for (let j = 0; j < h - i; j++) {
+//             s += " ";
+//         }
+//         let d = "";
+//         for (let j = 0; j < i * 2 - 1; j++) {
+//             d += "^";
+//         }
 
-let a = [];
-// let a2 = new Array();
-// let a3 = new ArrayBuffer();
-// let a4 = new Int8Array();
+//         document.write("<pre>" + s + d + s + "</pre>");
+//     } else {
+//         let s = "";
+//         for (let j = 0; j < i - h; j++) {
+//             s += " ";
+//         }
+//         let d = "";
+//         if (h * 2 - i === 1){
+//             for (let j = i * 2 + 2; j > h * 2 + i; j--) {
+//                 d += "^";
+//             }
+//         }else{
+//             for (let j = 1; j < i * 2 - e; j++) {
+//                 d += "^";
+//                 c += 2;
+//                 e++;
+//             }
+//         }
 
-a[0] = 0;
-a.push(1);
-a.push(2);
-a.unshift(-1);
-a.unshift(-2);
-
-let b = a.pop();
-let c = a.shift();
-
-a.reverse();
-
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-// let last2 = arr.splice(arr.length - 2, 2);
-
-// let newArr = last2.concat(arr);
-
-// let str = prompt().split("");
-
-// for (let i = 0; i < str.length; i++) {
-//     if (i === 0 && str[i] !== " ") str[i] = str[i].toUpperCase();
-//     if (i > 0 && str[i] !== " " && str[i - 1] === " ") {
-//         str[i] = str[i].toUpperCase();
+//         document.write("<pre>" + s + d + s + "</pre>");
 //     }
 // }
 
-// console.log(str.join(""));
-
-// while (1) {
-    // for (let i = 0; i < arr.length; i++) {
-    //     if (arr[i] % 2 === 0) {
-    //         let index = arr.indexOf(arr[i]);
-    //         arr.splice(index, 1);
-    //     }
-    // }
+// for (let i = h; i > 0; i--){
+//     document.write(`<pre>${' '.repeat(h - i)}${'^'.repeat(i * 2 - 1)}${' '.repeat(h - i)}</pre>`);
 // }
 
-// let indexes = [];
+// function fName(a){
+// console.log(a + a);
+// return a + a;
+// }
+//
+// function f2(a, b, c){
+// return c(a, b);
+// }
+//
+// console.log(f2(2, 3, function(c, d){return c * d}));
 
-// for (let i = 0; i < arr.length; i++){
-//     if (arr[i] % 2 === 0){
-//         indexes.push(arr[i]);
-//     }
+// fName2();
+
+// const fName2 = function(){
+
 // }
 
-// while (indexes.length){
-//     let index = arr.indexOf(indexes[0]);
-//     arr.splice(index, 1);
-//     indexes.splice(0, 1);
-// }
+// (function(){
+//     alert('Я сам по себе');
+// }());
 
-// arr = arr.filter(function(item) {return item % 2 !== 0}); // сложный вариант
+function count(a) {
+    if (isNaN(a)) {
+        console.log("Не число");
+        return;
+    }
 
-let arr2 = [3, 21, 43, 1, 32, 11, 1432, 2342, 23, 6];
+    if (a < 0) {
+        console.log("Число не положительное");
+        return;
+    }
 
-let sorted = arr2.sort(function (a, b){
-    return b - a;
-});
-
-console.log(sorted);
-
-let arr3 = [1];
-
-console.log(arr3.length);
-
-arr3[100] = 'lol';
-
-console.log(arr3.length);
-
-let arr4 = [];
-
-for (let i = 0; i < arr3.length; i++) {
-    if(arr3[i]){
-        arr4.push(arr3[i]);
+    if (a % 2 === 0) {
+        console.log(a * 2);
+    } else {
+        console.log(a / 2);
     }
 }
-
-arr3 = arr4;
