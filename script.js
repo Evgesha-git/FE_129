@@ -1,137 +1,147 @@
-// let arr = [12, false, 'Текст', 4, 2, -5, 0];
-// let arrBuf = [];
+// function makeArr (a, b){
+//     let arr = [];
 
-// while (arr.length){
-//     let el = arr.pop() + '';
-//     el = el.split('').reverse().join('');
-//     arrBuf.push(el);
+//     for (let i = a; i < b; i++){
+//         arr.push(i);
+//     }
+
+//     return arr;
 // }
 
-// console.log(arrBuf);
-
-// let arr2 = [5, 9, 21, , , 9, 78, , , , 6, 0];
-// let count = 0;
-
-// for (let i = 0; i < arr2.length; i++){
-//     if (!arr2[i] && arr2[i] !== 0){
-//         count++;
+// function printArr(arr){
+//     for(let el of arr){
+//         console.log(el);
 //     }
 // }
 
-// console.log(count);
+// // printArr(makeArr(+prompt('a'), +prompt('b')));
 
-// let arr = [];
+// function inArr(arr, min, max){
+//     let num = makeNum(min, max);
+    
+//     if (arr.length === 0) return num;
 
-// while (1){
-//     let a = prompt();
-//     if(isNaN(a)) continue;
-//     if (a === '' && a !== '0') break;
-//     arr.push(+a);
-// }
-
-// console.log(arr);
-
-// let arr = [48, 9, 0, 4, 21, 2, 1, 0, 8, 84, 76, 8, 4, 13, 2, 0];
-// let fIndex = arr.indexOf(0);
-// let lIndex = arr.lastIndexOf(0);
-// let summ = 0;
-// let sRez = '';
-
-// if (fIndex !== lIndex){
-//     for (let i = fIndex; i < lIndex; i++){
-//         summ += arr[i];
-//     }
-//     sRez = `Сумма элементов массива между нулями равна: ${summ}`;
-// }else{
-// document.write('<p>В массиве нет пар нулей</p>');
-//     sRez = 'В массиве нет пар нулей';
-// }
-
-// 'Сумма элементов массива между нулями равна:'
-
-// document.write(`<p>${summ ?
-//     `Сумма элементов массива между нулями равна: ${summ}` :
-//     `В массиве нет пар нулей`}</p>`);
-
-// document.write('<p>' + sRez + '</p>');
-
-// let h = +prompt();
-// let c = h;
-// let e = 1;
-
-// for (let i = 1; i < h * 2; i++) {
-//     if (i <= h) {
-//         let s = "";
-//         for (let j = 0; j < h - i; j++) {
-//             s += " ";
-//         }
-//         let d = "";
-//         for (let j = 0; j < i * 2 - 1; j++) {
-//             d += "^";
-//         }
-
-//         document.write("<pre>" + s + d + s + "</pre>");
+//     if (arr.includes(num)){
+//         return inArr(arr, min, max);
 //     } else {
-//         let s = "";
-//         for (let j = 0; j < i - h; j++) {
-//             s += " ";
-//         }
-//         let d = "";
-//         if (h * 2 - i === 1){
-//             for (let j = i * 2 + 2; j > h * 2 + i; j--) {
-//                 d += "^";
-//             }
-//         }else{
-//             for (let j = 1; j < i * 2 - e; j++) {
-//                 d += "^";
-//                 c += 2;
-//                 e++;
-//             }
-//         }
-
-//         document.write("<pre>" + s + d + s + "</pre>");
+//         return num;
 //     }
 // }
 
-// for (let i = h; i > 0; i--){
-//     document.write(`<pre>${' '.repeat(h - i)}${'^'.repeat(i * 2 - 1)}${' '.repeat(h - i)}</pre>`);
+// -> call -> call -> call -> .. -> call -> rez
+//rez <- .. <- ..<- .. <- .. <- .. <- .. <-  
+
+// function makeNum(a, b){
+//     return Math.floor(Math.random() * (b - a) + a);
 // }
 
-// function fName(a){
-// console.log(a + a);
-// return a + a;
-// }
-//
-// function f2(a, b, c){
-// return c(a, b);
-// }
-//
-// console.log(f2(2, 3, function(c, d){return c * d}));
+// function getRandArr(count, min, max){
+//     let arr = [];
 
-// fName2();
+//     if (count > max - min) return 'Количество элементов не может быть больше диапазона чисел';
 
-// const fName2 = function(){
+//     for (let i = 0; i < count; i++){
+//         arr.push(inArr(arr, min, max));
+//     }
 
+//     return arr;
 // }
 
-// (function(){
-//     alert('Я сам по себе');
-// }());
 
-function count(a) {
-    if (isNaN(a)) {
-        console.log("Не число");
-        return;
+// const f1 = () => {
+//     //Тело функции
+// }
+
+// function f2_2 (a){
+//     return () => arguments;
+// }
+
+// const f2 = a => a ** a;
+
+// const f3 = (a, b) => arguments;
+
+
+// function makeCountert(){
+//     let count = 0;
+
+//     return function (){
+//         return count++;
+//     }
+// }
+
+// let counter1 = makeCountert();
+// let counter2 = makeCountert();
+
+
+// function pyramid(len){
+//     let marker = null;
+    
+//     if (arguments.length > 1) {
+//         if (arguments[1] !== ' ' && String(arguments[1]).length === 1){
+//             marker = arguments[1];
+//         }
+//     } 
+
+//     for(let i = 1; i < len + 1; i++){
+//         for (let j = 0; j < i; j++){
+//             document.write(marker ? marker : i);
+//         }
+
+//         document.write('<br/>');
+//     }
+// }
+
+// function memo (fn){
+//     let cache = {};
+//     return a => {
+//         let n = a;
+//         if (n in cache){
+//             return cache[n]
+//         }else{
+//             let rez = fn(n);
+//             cache[n] = rez;
+//             return rez;
+//         }
+//     }
+// }
+
+// const fibonachi = memo((a) => {
+//     return a < 3 ? 1 : fibonachi(a - 1) + fibonachi(a - 2)
+// });
+
+// function fib(a){
+//     return a < 3 ? 1 : fib(a - 1) + fib(a - 2);
+// }
+
+// var i = 12;
+
+// var arr = [];
+
+// for (var i = 0; i < 100; i++){
+//     arr.push(i);
+// }
+
+// console.log(i);
+
+// let j = 45; 
+
+// let arr2 = [];
+
+// for (let j = 0; j < 100; j++){
+//     arr2.push(j);
+// }
+
+// console.log(j);
+
+function summ (num){
+    let sum = 0;
+    num += '';
+
+    for (let n of num){
+        sum += +n;
     }
 
-    if (a < 0) {
-        console.log("Число не положительное");
-        return;
-    }
+    if (sum < 10) return sum;
 
-    if (a % 2 === 0) {
-        console.log(a * 2);
-    } else {
-        console.log(a / 2);
-    }
+    return summ(sum);
 }
