@@ -1,147 +1,55 @@
-// function makeArr (a, b){
-//     let arr = [];
+let date = '2025-12-31';
+// date = date.replace('-', '/');
+let regDate = /([0-9]{4})-(\d{2})-(\d{2})/g;
 
-//     for (let i = a; i < b; i++){
-//         arr.push(i);
-//     }
+let date2 = date.replace(regDate, '$3/$2/$1');
+console.log(date2);
 
-//     return arr;
-// }
+console.log('-------------------');
 
-// function printArr(arr){
-//     for(let el of arr){
-//         console.log(el);
-//     }
-// }
+const replaceString = function (str){
+    let regExp = /ab+a/g;
+    return str.match(regExp);
+}
 
-// // printArr(makeArr(+prompt('a'), +prompt('b')));
+function mail(email) {
+    let regMail = /^[a-zA-Z0-9-_\.]{2,}@[a-z0-9\.]{2,11}\.[a-z]{2,11}$/g;
 
-// function inArr(arr, min, max){
-//     let num = makeNum(min, max);
-    
-//     if (arr.length === 0) return num;
+    return regMail.test(email);
+}
 
-//     if (arr.includes(num)){
-//         return inArr(arr, min, max);
-//     } else {
-//         return num;
-//     }
-// }
+const number = function(phone){
+    let reg = /^\+375\((25|29|33|44)\)\d{3}-?\d{2}-?\d{2}$/g;
+    return reg.test(phone);
+}
 
-// -> call -> call -> call -> .. -> call -> rez
-//rez <- .. <- ..<- .. <- .. <- .. <- .. <-  
+const addres = function(url){
+    let reg = /(https?:\/\/[0-9]?[a-z][a-z0-9]+(?:\.?[0-9a-z]+)+\.[a-z]{2,11})(\/.+\/(?:[^\?\s]+))?(\?[^#]+)?(#\w+)?/g;
 
-// function makeNum(a, b){
-//     return Math.floor(Math.random() * (b - a) + a);
-// }
+    let groups = reg.exec(url);
 
-// function getRandArr(count, min, max){
-//     let arr = [];
+    console.log([...groups]);
 
-//     if (count > max - min) return 'Количество элементов не может быть больше диапазона чисел';
+    return [...groups].filter(function(elem, index){
+        return index !== 0 ? elem : null;
+    });
+}
 
-//     for (let i = 0; i < count; i++){
-//         arr.push(inArr(arr, min, max));
-//     }
+let arr1 = [1, 2, 3];
+let arr2 = arr1;
+let arr3 = [...arr1, ...[4, 5, 6]];
 
-//     return arr;
-// }
+let obj = {
+    name: 'Alex',
+    age: 24,
+};
 
+function firstUpper(str) {
+    str = str.split(' ');
 
-// const f1 = () => {
-//     //Тело функции
-// }
+    str = str.map(function(elem){
+        if(elem) return elem[0].toUpperCase() + elem.substring(1);
+    });
 
-// function f2_2 (a){
-//     return () => arguments;
-// }
-
-// const f2 = a => a ** a;
-
-// const f3 = (a, b) => arguments;
-
-
-// function makeCountert(){
-//     let count = 0;
-
-//     return function (){
-//         return count++;
-//     }
-// }
-
-// let counter1 = makeCountert();
-// let counter2 = makeCountert();
-
-
-// function pyramid(len){
-//     let marker = null;
-    
-//     if (arguments.length > 1) {
-//         if (arguments[1] !== ' ' && String(arguments[1]).length === 1){
-//             marker = arguments[1];
-//         }
-//     } 
-
-//     for(let i = 1; i < len + 1; i++){
-//         for (let j = 0; j < i; j++){
-//             document.write(marker ? marker : i);
-//         }
-
-//         document.write('<br/>');
-//     }
-// }
-
-// function memo (fn){
-//     let cache = {};
-//     return a => {
-//         let n = a;
-//         if (n in cache){
-//             return cache[n]
-//         }else{
-//             let rez = fn(n);
-//             cache[n] = rez;
-//             return rez;
-//         }
-//     }
-// }
-
-// const fibonachi = memo((a) => {
-//     return a < 3 ? 1 : fibonachi(a - 1) + fibonachi(a - 2)
-// });
-
-// function fib(a){
-//     return a < 3 ? 1 : fib(a - 1) + fib(a - 2);
-// }
-
-// var i = 12;
-
-// var arr = [];
-
-// for (var i = 0; i < 100; i++){
-//     arr.push(i);
-// }
-
-// console.log(i);
-
-// let j = 45; 
-
-// let arr2 = [];
-
-// for (let j = 0; j < 100; j++){
-//     arr2.push(j);
-// }
-
-// console.log(j);
-
-function summ (num){
-    let sum = 0;
-    num += '';
-
-    for (let n of num){
-        sum += +n;
-    }
-
-    if (sum < 10) return sum;
-
-    return summ(sum);
+    return str.join(' ');
 }
