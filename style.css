@@ -1,173 +1,87 @@
 *{
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
-ul{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    list-style: none;
+.clear {
     width: 100%;
-    text-align: center;
-    font-size: 18px;
-    height: 0;
-    overflow: hidden;
-    transition: .3s linear;
-}
-
-.container{
-    max-width: 400px;
-    width: 100%;
-    margin: 20px auto;
-    border: 1px solid #b8b8b8;
-}
-
-.menu{
-    position: relative;
-}
-
-.title{
-    font-size: 20px;
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 2px solid rgb(85, 85, 85);
-}
-
-li{
-    padding: 10px 0;
-    border-bottom: 1px solid rgb(85, 85, 85);
-}
-
-.menu:hover > ul{
-    height: calc(42px * 5);
-}
-
-.square__btn {
-    width: 190px;
     height: 50px;
-    background: #b6ffac;
     line-height: 50px;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 5px;
     text-align: center;
-    margin: 0 auto 40px;
+    background: #0056ad;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
 }
-.square__container {
-
-}
-.square__elem {
-    width: 400px;
-    height: 400px;
-    border: 1px solid #b6ffac;
-    background: #b8b8b8;
+.container {
+    max-width: 600px;
+    width: 100%;
     margin: 0 auto;
-    /* opacity: 0; */
-    /* transition: 1.4s linear; */
-    animation: square_rotate 1s linear infinite alternate;
+    font-size: 18px;
+}
+.container__clear {
+    width: 100%;
+}
+.container__form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #189e00;
 }
 
-@keyframes square_rotate{
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(180deg);
-    }
+.container__form input{
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
 }
 
-/* .square__btn:hover ~ .square__elem{
-    opacity: 1;
-    transform: rotate(190deg);
-} */
+.container__form button{
+    box-sizing: border-box;
+    padding: 10px;
+    margin-left: 20px;
+    background: #0056ad;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid rgb(129, 129, 129);
+    cursor: pointer;
+}
 
+.container__list {
+    list-style: none;
+    margin: 10px 0;
+}
 
-.preloader {
-    width: 100px;
-    margin: 0 auto;
+.item__button{
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 4px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.done{
+    text-decoration: line-through;
+}
+
+.del {
+    color: rgb(200, 0, 0);
+
+}
+.edit {
+    color: rgb(0, 170, 0); 
+}
+.item {
     display: grid;
-    grid-template-columns: repeat(2, 40px);
-    grid-template-rows: repeat(2, 40px);
+    grid-template-columns: 30px auto 60px;
+    align-items: center;
 }
-.preloader__elem {
-    border: 3px solid #5ffbc9;
-    /* width: 40px;
-    height: 40px; */
+.item__buttons {
+    display: flex;
 }
-
-@keyframes loader-1{
-    0%{
-        transform: rotate(0deg);
-        transform-origin: 100% 100%;
-    }
-    50%{
-        border-color: rgb(255, 0, 183);
-    }
-    100%{
-        transform: rotate(360deg);
-        transform-origin: 100% 100%;
-    }
-}
-
-@keyframes loader-2{
-    0%{
-        transform: rotate(0deg);
-        transform-origin: 0% 100%;
-    }
-    50%{
-        border-color: rgb(21, 0, 255);
-    }
-    100%{
-        transform: rotate(-360deg);
-        transform-origin: 0% 100%;
-    }
-}
-
-@keyframes loader-3{
-    0%{
-        transform: rotate(0deg);
-        transform-origin: 100% 0%;
-    }
-    50%{
-        border-color: rgb(21, 255, 0);
-    }
-    100%{
-        transform: rotate(-360deg);
-        transform-origin: 100% 0%;
-    }
-}
-
-@keyframes loader-4{
-    0%{
-        transform: rotate(0deg);
-        transform-origin: 0% 0%;
-    }
-    50%{
-        border-color: rgb(255, 140, 0);
-    }
-    100%{
-        transform: rotate(360deg);
-        transform-origin: 0% 0%;
-        
-    }
-}
-
-.preloader__elem-1{
-    animation: loader-1 3s linear infinite;
-}
-
-.preloader__elem-2{
-    animation: loader-2 3s linear infinite;
-}
-
-.preloader__elem-3{
-    animation: loader-3 3s linear infinite;
-}
-
-.preloader__elem-4{
-    animation: loader-4 3s linear infinite;
-}
-
-@media only screen and (max-width: 426px) and (min-width: 320px){
-    .title{
-        background: #5ffbc9;
-    }
+.text {
 }
