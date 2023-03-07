@@ -1,49 +1,79 @@
-const slider = selector => {
-    const slidersContainer = document.querySelectorAll(selector);
+const popup = selector => {
+    const elems = document.querySelectorAll(selector);
+    if (!elems) return;
 
-    const sliderHandler = slideContainer => {
-        const sliders = slideContainer.querySelector('.slides');
-        if (!sliders) return;
+    const show = content => {
+        let popUpContainer = document.createElement('div');
+        let popUpModal = document.createElement('div');
+        let popUpClose = document.createElement('div');
+        let popUpContent = document.createElement('div');
 
-        const slides = slideContainer.querySelectorAll('.slide');
-        if (!slides || !slides.length > 1) return;
+        popUpContainer.classList.add('popup');
+        popUpModal.classList.add('popup__modal');
+        popUpClose.classList.add('popup__close');
+        popUpContent.classList.add('popup__content');
 
-        const buttons = slideContainer.querySelectorAll('.button');
-        if (!buttons) return;
+        popUpClose.innerHTML = '&#215;';
+        popUpContent.append(content);
 
-        const switchSlide = e => {
-            const buf = e.target.classList.contains('next');
+        popUpClose.addEventListener('click', () => popUpContainer.remove());
 
-            let x = sliders.style.transform || '0'; // transform -> translate(-xxx%);
-            x = x.replace('translate(', "");
-            // x = x.replace(')', '');
-            x = Math.abs(parseInt(x));
+        popUpModal.append(popUpClose, popUpContent);
+        popUpContainer.append(popUpModal);
 
-            if (buf){
-                if (x < (slides.length * 100) - 100){
-                    x += 100;
-                }else{
-                    x = 0;
-                }
-            }else{
-                if (x > 0){
-                    x -= 100;
-                }else{
-                    x = (slides.length * 100) - 100;
-                }
-            }
-
-            sliders.style.transform = `translate(-${x}%)`;
-        }
-
-        buttons.forEach(button => {
-            button.addEventListener('click', switchSlide);
-        });
+        document.body.append(popUpContainer);
     }
 
-    slidersContainer.forEach(slide => sliderHandler(slide));
+    const popUpHandler = e => {
+        e.preventDefault();
+
+        let elem = e.target;
+        let type = elem.dataset.type;
+
+        console.log(elem);
+        console.log(type);
+
+        if (!type){
+            let parent = elem.closest('[data-type]');
+
+            if (!parent) return;
+            type = parent.dataset.type;
+            if (!type) return;
+            elem = parent;
+        }
+
+        let content = '';
+
+        if (type === 'img'){
+            const href = elem.href;
+            if (!href) return;
+
+            let img = document.createElement('img');
+            img.setAttribute('src', href);
+            content = img;
+        }
+        if (type === 'text'){
+            let text = elem.title;
+            if (!text) return;
+            content = text;
+        }
+
+        if (type === 'content'){
+            let id = elem.dataset.id;
+            if (!id) return;
+
+            const idContent = document.getElementById(id).children[0];
+            if (!idContent) return;
+
+             content = idContent;
+        }
+
+        show(content);
+    }
+
+    elems.forEach(elem => {
+        elem.addEventListener('click', popUpHandler);
+    });
 }
 
-slider('.main__slider');
-
-//Дома - написать аккордеон
+popup('a');
