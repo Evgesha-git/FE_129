@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.tabs__buttons{
+    display: flex;
+    list-style: none;
+}
+
+.tabs__buttons li{
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #0003;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.tabs__buttons li:hover{
+    background: #f2fdd4;
+}
+
+.tabs__buttons li.active{
+    background: #f2fdd4;
+}
+
+.tabs__buttons li.add{
+    text-align: center;
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    line-height: 20px;
+}
+
+.tabs__content{
+    display: flex;
+    list-style: none;
+}
+
+.tabs__content li{
+    display: none;
+}
+
+.tabs__content li.active{
+    display: block;
+}
