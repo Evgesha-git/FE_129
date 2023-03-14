@@ -31,8 +31,8 @@ const filterGalery = selector => {
         });
     }
 
-    containers.forEach(container => {
-        filterHandler(container);
+    containers.forEach(c => {
+        filterHandler(c);
     });
 }
 
