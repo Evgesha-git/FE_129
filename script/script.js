@@ -15,6 +15,16 @@ function Note(data){
         // };
         Object.assign(this.data, data);
     }
+
+    // Object.defineProperty(this, 'setData', {
+    //     enumerable: true,
+    //     configurable: true,
+    //     writable: true,
+    //     get: () => this['setData'],
+    //     set: (data) => this['setData'] = data,
+    // });
+
+    
 }
 
 function Notes (){
