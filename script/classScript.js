@@ -1,36 +1,18 @@
 class Note {
-    #data;
-
     constructor() {
-        this.#data = null;
-        // this.dataTest = new Proxy(this, {
-        //     set(target, prop, value){
-        //         if (prop.startWith === '#'){
-        //             throw new Error('Отказано в доступе');
-        //         }else{
-        //             target[prop] = value
-        //         }
-        //     },
-        //     get(target, prop){
-        //         if (prop.startsWith === '#'){
-        //             throw new Error('Отказано в доступе');
-        //         }else{
-        //             return target[prop];
-        //         }
-        //     }   
-        // });
+        this._data = null;
     }
 
     get data() {
-        return this.#data;
+        return this._data;
     }
 
     set data(data) {
-        if (data.title) this.#data = data
+        if (data.title) this._data = data
     }
 
     edit(data) {
-        Object.assign(this.#data, data);
+        Object.assign(this._data, data);
     }
 }
 
@@ -71,6 +53,60 @@ class Notes {
 
     remove(id) {
         this.notes = this.notes.filter(note => note.data.id !== id);
+    }
+
+    set store(data) {
+        let json = JSON.stringify(data);
+        // console.dir(json);
+        localStorage.setItem('notes', json);
+        this.cookie = 10;
+    }
+
+    get store() {
+        if (!localStorage.getItem('notes')) return false;
+
+        if (!this.cookie) {
+            localStorage.removeItem('notes');
+            return false;
+        }
+
+        let data = localStorage.getItem('notes');
+        data = JSON.parse(data);
+        return data;
+    }
+
+    get cookie() {
+        let name = 'note';
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches || false;
+    }
+
+    set cookie(time) {
+        let name = 'note';
+        let value = 'note';
+        let options = {
+            path: '/',
+            secure: true,
+            'max-age': time
+        };
+
+        if (options.expires instanceof Date) {
+            options.expires = options.expires.toUTCString();
+        }
+
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        for (let optionKey in options) {
+            updatedCookie += "; " + optionKey;
+            let optionValue = options[optionKey];
+            if (optionValue !== true) {
+                updatedCookie += "=" + optionValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
     }
 }
 
@@ -113,12 +149,23 @@ class NoteUI extends Notes {
 
             titleInput.value = '';
             contentInput.value = '';
-            console.log(this.notes);
+            // console.log(this.notes);
             this.render();
+            this.store = this.notes;
         });
 
         formContainer.append(titleInput, contentInput, buttonAdd);
         this.container.append(formContainer, this.noteContainer);
+
+        if (this.store) {
+            let data = this.store;
+            // this.notes = data;
+            data.forEach(note => {
+                // console.log(Object.keys(note));
+                Object.keys(note).forEach(key => this.add(note[key]));
+            });
+            this.render();
+        }
     }
 
     search(target, selector) {
@@ -152,12 +199,12 @@ class NoteUI extends Notes {
             edit.classList.add('edit');
             edit.innerText = 'Редактировать заметку';
             edit.addEventListener('click', () => {
-                if (flag){
+                if (flag) {
                     h2.contentEditable = true;
                     p.contentEditable = true;
                     edit.innerText = 'Сохранить изменения';
                     flag = !flag;
-                }else{
+                } else {
                     let data = {
                         title: h2.innerText,
                         content: p.innerText,
@@ -169,8 +216,9 @@ class NoteUI extends Notes {
                     super.edit(note.data.id, data);
                     edit.innerText = 'Редактировать заметку';
                     flag = !flag;
+                    this.store = this.notes;
                 }
-                
+
             });
 
             // p.addEventListener('keydown', e => this.saveEdit(
@@ -193,7 +241,7 @@ class NoteUI extends Notes {
     }
 
     saveEdit(e, id, title, content) {
-        if (e.altKey && e.code === 'Enter'){
+        if (e.altKey && e.code === 'Enter') {
             let data = {
                 title: title.innerText,
                 content: content.innerText
@@ -213,3 +261,67 @@ class NoteUI extends Notes {
 
 new NoteUI('.container')
 
+// for(let i = 0; i < 10; i++){
+//     setTimeout(() => console.log(i), 0);
+// }
+
+// let time = new Date;
+
+// setTimeout(function go() {
+//     let diff = new Date - time;
+//     console.log(diff);
+//     time = new Date;
+
+//     setTimeout(go, 100);
+// }, 100);
+
+
+
+let f1 = function () {
+    console.log('a');
+}
+
+function f2() {
+    console.log('b');
+}
+
+f1();
+f2();
+
+let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Промис выполнен'), 7000);
+    setTimeout(() => reject('Промис выполнен с ошибкой'), 4000);
+});
+
+console.log(promise);
+
+promise
+    .then(rez => {
+        console.log(rez);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+let el = document.createElement('div');
+el.classList.add('square');
+
+const rotate = () => {
+    let r = el.style.transform;
+    r = r.replace('rotate(', '');
+    r = parseInt(r) || 0;
+    el.style.transform = `rotate(${r + 360}deg)`;
+    let promise = new Promise((resolve) => {
+        let time = getComputedStyle(el).transitionDuration;
+        setTimeout(() => resolve(), parseFloat(time) * 1000);
+    });
+
+    promise
+        .then(() => el.addEventListener('click', rotate));
+        
+    el.removeEventListener('click', rotate);
+}   
+
+el.addEventListener('click', rotate);
+
+document.body.append(el);
