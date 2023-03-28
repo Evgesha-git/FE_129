@@ -108,6 +108,11 @@ class Notes {
 
         document.cookie = updatedCookie;
     }
+
+    async getData(){
+        let resp = await fetch('https://jsonplaceholder.typicode.com/posts');
+        return await resp.json();
+    }
 }
 
 class NoteUI extends Notes {
@@ -118,7 +123,7 @@ class NoteUI extends Notes {
         this.init(selector);
     }
 
-    init(selector) {
+    async init(selector) {
         this.container = this.search(null, selector);
 
         let formContainer = document.createElement('form');
@@ -143,9 +148,9 @@ class NoteUI extends Notes {
             event.preventDefault();
 
             let title = titleInput.value;
-            let content = contentInput.value;
+            let body = contentInput.value;
 
-            this.add({ title, content });
+            this.add({ title, body });
 
             titleInput.value = '';
             contentInput.value = '';
@@ -164,6 +169,15 @@ class NoteUI extends Notes {
                 // console.log(Object.keys(note));
                 Object.keys(note).forEach(key => this.add(note[key]));
             });
+            this.render();
+        }else{
+            let data = await this.getData();
+            data.forEach(note => {
+                this.add(note);
+            });
+            console.log(data);
+            console.log(this.notes);
+            this.store = this.notes;
             this.render();
         }
     }
@@ -186,7 +200,7 @@ class NoteUI extends Notes {
 
             let p = document.createElement('p');
             p.classList.add('content');
-            p.innerText = note.data.content;
+            p.innerText = note.data.body;
 
             let del = document.createElement('button');
             del.classList.add('del');
@@ -207,7 +221,7 @@ class NoteUI extends Notes {
                 } else {
                     let data = {
                         title: h2.innerText,
-                        content: p.innerText,
+                        body: p.innerText,
                     }
 
                     h2.contentEditable = false;
@@ -244,7 +258,7 @@ class NoteUI extends Notes {
         if (e.altKey && e.code === 'Enter') {
             let data = {
                 title: title.innerText,
-                content: content.innerText
+                body: content.innerText
             }
             title.contentEditable = false;
             content.contentEditable = false;
@@ -259,7 +273,7 @@ class NoteUI extends Notes {
     }
 }
 
-new NoteUI('.container')
+new NoteUI('.container');
 
 // for(let i = 0; i < 10; i++){
 //     setTimeout(() => console.log(i), 0);
@@ -277,51 +291,105 @@ new NoteUI('.container')
 
 
 
-let f1 = function () {
-    console.log('a');
-}
+// let f1 = function () {
+//     console.log('a');
+// }
 
-function f2() {
-    console.log('b');
-}
+// function f2() {
+//     console.log('b');
+// }
 
-f1();
-f2();
+// f1();
+// f2();
 
-let promise = new Promise((resolve, reject) => {
-    setTimeout(() => resolve('Промис выполнен'), 7000);
-    setTimeout(() => reject('Промис выполнен с ошибкой'), 4000);
-});
+// let promise = new Promise((resolve, reject) => {
+//     setTimeout(() => resolve('Промис выполнен'), 7000);
+//     setTimeout(() => reject('Промис выполнен с ошибкой'), 4000);
+// });
 
-console.log(promise);
+// console.log(promise);
 
-promise
-    .then(rez => {
-        console.log(rez);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+// promise
+//     .then(rez => {
+//         console.log(rez);
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
 
-let el = document.createElement('div');
-el.classList.add('square');
+// let el = document.createElement('div');
+// el.classList.add('square');
 
-const rotate = () => {
-    let r = el.style.transform;
-    r = r.replace('rotate(', '');
-    r = parseInt(r) || 0;
-    el.style.transform = `rotate(${r + 360}deg)`;
-    let promise = new Promise((resolve) => {
-        let time = getComputedStyle(el).transitionDuration;
-        setTimeout(() => resolve(), parseFloat(time) * 1000);
-    });
+// const rotate = () => {
+//     let r = el.style.transform;
+//     r = r.replace('rotate(', '');
+//     r = parseInt(r) || 0;
+//     el.style.transform = `rotate(${r + 360}deg)`;
+//     let promise = new Promise((resolve) => {
+//         let time = getComputedStyle(el).transitionDuration;
+//         setTimeout(() => resolve(), parseFloat(time) * 1000);
+//     });
 
-    promise
-        .then(() => el.addEventListener('click', rotate));
-        
-    el.removeEventListener('click', rotate);
-}   
+//     promise
+//         .then(() => el.addEventListener('click', rotate));
 
-el.addEventListener('click', rotate);
+//     el.removeEventListener('click', rotate);
+// }   
 
-document.body.append(el);
+// el.addEventListener('click', rotate);
+
+// document.body.append(el);
+
+// let a = '';
+
+//fetch
+
+// fetch('https://jsonplaceholder.typicode.com/todos', {
+//     method: "GET",
+//     body: '',
+//     headers: ''
+// })
+//     .then(response => {
+//         console.log(response);
+//         if (response.status === 200){
+//             return response.json();
+//         }else{
+//             throw new Error(response.status);
+//         }
+//     })
+//     .then(data => {
+//         console.log(data);
+//         a = data;
+//     })
+//     .catch(error => console.log(error));
+
+// console.log(a);
+
+//async await
+
+// async function query() {
+//     let a = '';
+//     let el = document.createElement('div');
+//     el.classList.add('square');
+//     document.body.append(el);
+//     let response = await fetch('https://jsonplaceholder.typicode.com/todos');
+//     a = await response.json();
+//     el.remove();
+//     // console.log(a);
+//     return a;
+// }
+
+// console.log(query().then(a => a));
+
+
+let a = fetch('https://jsonplaceholder.typicode.com/todos/1');
+let b = fetch('https://jsonplaceholder.typicode.com/comments/3');
+let c = fetch('https://jsonplaceholder.typicode.com/users/8');
+
+Promise.all([a, b, c])
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+Promise.race([a, b, c])
+    .then(resp => console.log(resp.json()))
+    .catch(error => console.log(error));

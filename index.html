@@ -6,11 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        :root{
+            --bg-square: #ff8e8e;
+            --point-hand: url('./pointer.svg');
+        }
+
         .square{
             width: 200px;
             height: 200px;
-            background: #ff8e8e;
+            background: var(--bg-square);
             transition: .6s linear;
+        }
+        .content{
+            font-size: 18px;
+            cursor: var(--point-hand), pointer;
+        }
+
+        .title{
+            font-size: 20px;
+            cursor: var(--point-hand), pointer;
+        }
+
+        button{
+            cursor: var(--point-hand), pointer;
         }
     </style>
 </head>
@@ -20,5 +38,9 @@
     </div>
 </body>
 <!-- <script src="./script/script.js"></script> -->
-<script src="./script/classScript.js"></script>
+<!-- <script src="./script/classScript.js"></script> -->
+<!-- <script src="./script/note.js"></script>
+<script src="./script/notes.js"></script>
+<script src="./script/noteUi.js"></script> -->
+<script src="./script/app.js" type="module"></script>
 </html>
