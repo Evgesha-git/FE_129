@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100vh;
+}
+
+body, #root{
+    height: 100%;
+}
+
+.header{
+    width: 100%;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.nav{
+    max-width: 600px;
+    width: 100%;
+}
+
+.nav ul{
+    display: flex;
+    width: 100%;
+    list-style-type: none;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.nav ul a{
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+}
+
+main{
+    height: calc(100% - 132.4px);
+}
