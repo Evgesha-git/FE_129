@@ -1,3 +1,5 @@
+import { widget } from "../pajes/cart.js";
+
 export default function header() {
     const headerLogo = `
     <div class="logo">
@@ -21,6 +23,7 @@ export default function header() {
     const container = document.createElement('div');
     container.classList.add('container');
     container.innerHTML = `${headerLogo}${headerNav}`;
+    container.append(widget);
 
     const header = document.createElement('header');
     header.classList.add('header');
