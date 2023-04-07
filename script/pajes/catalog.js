@@ -1,5 +1,5 @@
 import { getData } from "../components/getDataApi.js";
-import { addCart } from "./cart.js";
+import { addButton } from "../components/button.js";
 
 export default function catalog (){
     const container = document.createElement('div');
@@ -31,15 +31,13 @@ export default function catalog (){
             desc.classList.add('desc');
             desc.innerHTML = `
                 <p class="category">${element.category}</p>
-                <h3 class="item__title">${element.title}</h3>
+                <h3 class="item__title">
+                    <a href="#item_${element.id}">${element.title}</a>
+                </h3>
                 <p class="price">${element.price}</p>
             `;
-            let addButton = document.createElement('button');
-            addButton.innerText = 'Add to cart';
-            addButton.addEventListener('click', () => {
-                addCart(element);
-            });
-            item.append(imgContainer, desc, addButton);
+            
+            item.append(imgContainer, desc, addButton(element));
             catalog.append(item);
         });
     })();

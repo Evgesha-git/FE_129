@@ -10,8 +10,8 @@ export default function main() {
 
     const render = async () => {
         main.innerHTML = ''
-        let module = await router();
-        main.append(module());
+        let [module, id] = await router();
+        main.append(module(id));
     }
 
     window.addEventListener('load', render)
