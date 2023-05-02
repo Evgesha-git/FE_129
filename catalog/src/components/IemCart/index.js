@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../../App';
 import style from './ItemCart.module.css';
+import { Link } from 'react-router-dom';
 
 const ItemCart = ({ data }) => {
     const [added, setAdded] = useState(false);
-    const {cart, setCart} = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
 
     const addToCart = () => {
         setCart([...cart, data]);
@@ -18,9 +19,13 @@ const ItemCart = ({ data }) => {
     return (
         <div className={style.item}>
             <div className={style.image}>
-                <img src={data.image} alt={data.title} />
+                <Link to={`${data.id}`}>
+                    <img src={data.image} alt={data.title} />
+                </Link>
             </div>
-            <h2 className={style.title}>{data.title}</h2>
+            <h2 className={style.title}>
+                <Link to={`${data.id}`}>{data.title}</Link>
+            </h2>
             <p className={style.rating}>{data.rating.rate}</p>
             <p className={style.price}>{data.price}</p>
             <button

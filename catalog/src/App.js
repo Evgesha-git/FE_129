@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
 import Catalog from './pages/Catalog';
 import { createContext, useState } from 'react';
+import Cart from './pages/Cart';
+import Product from './pages/Product';
 
 export const CartContext = createContext();
 
@@ -20,7 +22,9 @@ function App() {
           <Route path='/' element={<Nav />}>
             <Route index element={<Home />} />
             <Route path='/catalog' element={<Catalog />} />
+            <Route path='/catalog/:productId' element={<Product/>}/>
             <Route path='/abaut' element={<Abaut />} />
+            <Route path='/cart' element={<Cart/>}/>
           </Route>
         </Routes>
         <Footer />
