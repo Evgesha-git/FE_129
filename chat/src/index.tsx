@@ -2,11 +2,16 @@ import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { Auth, getAuth } from 'firebase/auth';
+import { Firestore, getFirestore } from 'firebase/firestore';
 import { app } from './utils/db';
 
-export const Context = createContext<any>(null);
+export type TContext = {
+  auth: Auth,
+  firestore: Firestore
+}
+
+export const Context = createContext<null | TContext | any>(null);
 
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);

@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { privateRoutes, publickRoutes } from '../../routes';
 import Chat from '../Chat';
 import Login from '../Login/Login';
-import { Context } from '../..';
+import { Context, TContext } from '../..';
 
 const Approuter: React.FC = () => {
     const {auth} = useContext(Context);
