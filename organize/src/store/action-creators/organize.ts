@@ -37,7 +37,7 @@ export const setOrgaize = (
             set(ref(db, `organize/${uId}`), {
                 id: uId,
                 name: name,
-                task,
+                tasks: task,
             });
             dispatch({
                 type: OrganizeActionTypes.SET_ORGANIZE,
@@ -47,6 +47,36 @@ export const setOrgaize = (
             dispatch({
                 type: OrganizeActionTypes.ERROR_ORGANIZE,
                 payload: 'Произошла ошибка при отправке данных'
+            });
+        }
+    }
+}
+
+export const clearOrganize = () => {
+    return (dispatch: Dispatch<OrganizeActions>) => {
+        dispatch({ type: OrganizeActionTypes.CLEAR_ORGANIZE })
+    }
+}
+
+export const editOrganize = (
+    uId: string | null | undefined,
+    task: ITask) => {
+    return async (dispatch: Dispatch<OrganizeActions>) => {
+        dispatch({ type: OrganizeActionTypes.FETCH_ORGANIZE });
+        try {
+            const response = await get(child(ref(db), `organize/${uId}`));
+            if (response.exists()) {
+                const oldTasc = response.val();
+                oldTasc.task = [...oldTasc.task, task];
+                await update(ref(db, `organize/${uId}`), oldTasc);
+                dispatch({ type: OrganizeActionTypes.EDIT_TASK, payload: 'Данные обнавлены' });
+            } else {
+                throw new Error();
+            }
+        } catch (error) {
+            dispatch({
+                type: OrganizeActionTypes.ERROR_ORGANIZE,
+                payload: 'Не удалось обнавить данные'
             });
         }
     }

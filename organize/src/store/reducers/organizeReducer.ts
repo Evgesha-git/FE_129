@@ -57,6 +57,13 @@ export const organizeReducer = (
                 user: state.user,
                 success: '',
             };
+        case OrganizeActionTypes.CLEAR_ORGANIZE:
+            return {
+                loading: false, 
+                error: null,
+                user: initialState.user,
+                success: ''
+            }
         default:
             return state;
     }

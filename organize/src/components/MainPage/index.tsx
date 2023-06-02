@@ -1,59 +1,92 @@
-import react, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { auth } from '../../utils/dbConfig';
 import { GoogleAuthProvider, User, signInWithPopup } from 'firebase/auth';
 import { useActions } from '../../hooks/useActions';
 import { useTypeSelector } from '../../hooks/useTypeSelector';
-import React from 'react';
+import { useNavigate } from 'react-router';
+import { routes } from '../../utils/routes';
 
 const MainPage: React.FC = () => {
-    const { setOrgaize, getOrganize } = useActions()
-    const { user, loading, success, error } = useTypeSelector(state =>
-        state.organize);
-    const [title, setTitle] = useState<string>('');
-    const [contnt, setContent] = useState<string>('');
+    const { logInEmail, logInGoogle, registerInEmail } = useActions();
+    const { user, loading, error } = useTypeSelector(state => state.user);
     const [userAuth, setUserAuth] = useState<User | null>();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [form, setForm] = useState<boolean>(true);
+    const navigate = useNavigate();
 
-    const login = async () => {
-        const provider = new GoogleAuthProvider();
-        const { user } = await signInWithPopup(auth, provider);
-        setUserAuth(user);
-    }
-
-    const addTask =async (e: FormEvent<HTMLFormElement>) => {
+    const logWithEmail = (e: React.FocusEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const task = {
-            id: Date.now().toString(),
-            title,
-            content: contnt,
-            date: new Date().toString()
-        }
-
-        setOrgaize(userAuth?.uid, task, userAuth?.displayName)
+        logInEmail(email, password);
     }
 
-    return userAuth ? (
+    const registerUser = (e: React.FocusEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        registerInEmail(email, password);
+    }
+
+    useEffect(() => {
+        if (user) {
+            navigate(routes.taskList)
+        }
+    }, [user]);
+
+    // const addTask =async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     const task = {
+    //         id: Date.now().toString(),
+    //         title,
+    //         content: contnt,
+    //         date: new Date().toString()
+    //     }
+
+    //     setOrgaize(userAuth?.uid, task, userAuth?.displayName)
+    // }
+
+    return form ? (
         <div>
-            <form onSubmit={addTask}>
+            <form onSubmit={logWithEmail}>
+                <h2>Авторизация</h2>
                 <input
                     type="text"
-                    onChange={
-                        (e: React.ChangeEvent<HTMLInputElement>) =>
-                            setTitle(e.target.value)
-                    }
-                    value={title}
+                    placeholder='Email'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setEmail(e.target.value)}
+                    value={email}
                 />
-                <textarea
-                    onChange={
-                        (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                            setContent(e.target.value)
-                    }
-                    value={contnt}
-                ></textarea>
-                <button type="submit">Отправить</button>
+                <input
+                    type="password"
+                    placeholder='Password'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setPassword(e.target.value)}
+                />
+                <button type="submit">Войти</button>
             </form>
+            <button onClick={logInGoogle}>Войти через Google</button>
+            <button onClick={() => setForm(!form)}>Регистрация</button>
         </div>
     ) : (
-        <button onClick={() => login()}>Войти через Google</button>
+        <div>
+            <form onSubmit={registerUser}>
+                <h2>Регистрация</h2>
+                <input
+                    type="text"
+                    placeholder='Email'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setEmail(e.target.value)}
+                    value={email}
+                />
+                <input
+                    type="password"
+                    placeholder='Password'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setPassword(e.target.value)}
+                />
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <button onClick={logInGoogle}>Войти через Google</button>
+            <button onClick={() => setForm(!form)}>Авторизация</button>
+        </div>
     )
 }
 
