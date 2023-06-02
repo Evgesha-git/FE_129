@@ -37,7 +37,7 @@ export const setOrgaize = (
             set(ref(db, `organize/${uId}`), {
                 id: uId,
                 name: name,
-                tasks: task,
+                tasks: [task],
             });
             dispatch({
                 type: OrganizeActionTypes.SET_ORGANIZE,
@@ -67,7 +67,7 @@ export const editOrganize = (
             const response = await get(child(ref(db), `organize/${uId}`));
             if (response.exists()) {
                 const oldTasc = response.val();
-                oldTasc.task = [...oldTasc.task, task];
+                oldTasc.tasks = [...oldTasc.tasks, task];
                 await update(ref(db, `organize/${uId}`), oldTasc);
                 dispatch({ type: OrganizeActionTypes.EDIT_TASK, payload: 'Данные обнавлены' });
             } else {
